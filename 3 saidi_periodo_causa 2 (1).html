@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAIDI - Periodo > Causa</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #5d6678;
+      --line: #d9dee8;
+      --i: #2563eb;
+      --p: #e11d48;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    header {
+      padding: 18px 24px 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    #breadcrumb {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:disabled {
+      color: #a4acbb;
+      cursor: default;
+      background: #f4f6fa;
+    }
+    main {
+      min-height: calc(100vh - 91px);
+      padding: 12px;
+    }
+    #chart {
+      width: 100%;
+      height: calc(100vh - 120px);
+      min-height: 620px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title"></h1>
+    <div class="bar">
+      <div id="breadcrumb"></div>
+      <button id="backButton" type="button" disabled>Volver</button>
+    </div>
+  </header>
+  <main>
+    <div id="chart"></div>
+  </main>
+
+  <script>
+    const payload = {"title": "SAIDI - Periodo > Causa", "valueName": "SAIDI", "levelNames": ["Periodo", "Causa"], "data": {"root": [{"label": "S1-2024", "I": 1.119565828959149, "P": 1.3541653003400713, "total": 2.47373112929922}, {"label": "S1-2025", "I": 1.3680437706580708, "P": 1.427449, "total": 2.795492770658071}, {"label": "S1-2026", "I": 1.35701497687945, "P": 0.89219, "total": 2.24920497687945}], "children": {"S1-2024": [{"label": "Programada", "I": 0.0, "P": 1.3541653003400713, "total": 1.3541653003400713}, {"label": "No determinado", "I": 0.3707720930448214, "P": 0.0, "total": 0.3707720930448214}, {"label": "Causado por Terceros", "I": 0.1643907561977344, "P": 0.0, "total": 0.1643907561977344}, {"label": "Envejecimiento", "I": 0.13585505606050574, "P": 0.0, "total": 0.13585505606050574}, {"label": "Red subterránea MT con defecto", "I": 0.1006597877537799, "P": 0.0, "total": 0.1006597877537799}, {"label": "Falta de Mantenimiento", "I": 0.0680075657837493, "P": 0.0, "total": 0.0680075657837493}, {"label": "Causado por Animales", "I": 0.05970793066679801, "P": 0.0, "total": 0.05970793066679801}, {"label": "Trabajo de Urgencia", "I": 0.05572115354474931, "P": 0.0, "total": 0.05572115354474931}, {"label": "Defecto Cliente Particular", "I": 0.04795553554410059, "P": 0.0, "total": 0.04795553554410059}, {"label": "Causado por Árbol / Poda", "I": 0.04622801983107934, "P": 0.0, "total": 0.04622801983107934}, {"label": "Red Aérea MT con defecto", "I": 0.035763377636556765, "P": 0.0, "total": 0.035763377636556765}, {"label": "Varios", "I": 0.011346277295776603, "P": 0.0, "total": 0.011346277295776603}, {"label": "Maniobras sin tensión", "I": 0.010969983177946218, "P": 0.0, "total": 0.010969983177946218}, {"label": "Transformador MTBT con defecto", "I": 0.006176374455412569, "P": 0.0, "total": 0.006176374455412569}, {"label": "Sistema de Protección", "I": 0.005390468933285205, "P": 0.0, "total": 0.005390468933285205}, {"label": "Deficiencia de material", "I": 0.000621449032853646, "P": 0.0, "total": 0.000621449032853646}], "S1-2025": [{"label": "Programada", "I": 0.0, "P": 1.427449, "total": 1.427449}, {"label": "No determinado", "I": 0.417577, "P": 0.0, "total": 0.417577}, {"label": "Causado por Terceros", "I": 0.27837451576587613, "P": 0.0, "total": 0.27837451576587613}, {"label": "Envejecimiento", "I": 0.211416, "P": 0.0, "total": 0.211416}, {"label": "Causado por Animales", "I": 0.12498567555988298, "P": 0.0, "total": 0.12498567555988298}, {"label": "Red subterránea MT con defecto", "I": 0.05265132874020553, "P": 0.0, "total": 0.05265132874020553}, {"label": "Trabajo de Urgencia", "I": 0.046048, "P": 0.0, "total": 0.046048}, {"label": "Falta de Mantenimiento", "I": 0.044767, "P": 0.0, "total": 0.044767}, {"label": "Causado por Árbol / Poda", "I": 0.03510997474525028, "P": 0.0, "total": 0.03510997474525028}, {"label": "Red Aérea MT con defecto", "I": 0.03278055338649429, "P": 0.0, "total": 0.03278055338649429}, {"label": "Fenómenos Naturales", "I": 0.030887, "P": 0.0, "total": 0.030887}, {"label": "Defecto Cliente Particular", "I": 0.02775772246036162, "P": 0.0, "total": 0.02775772246036162}, {"label": "Varios", "I": 0.025843, "P": 0.0, "total": 0.025843}, {"label": "Maniobras sin tensión", "I": 0.02093, "P": 0.0, "total": 0.02093}, {"label": "Sistema de Protección", "I": 0.013009, "P": 0.0, "total": 0.013009}, {"label": "Montaje Deficiente", "I": 0.004812, "P": 0.0, "total": 0.004812}, {"label": "Transformador MTBT con defecto", "I": 0.001095, "P": 0.0, "total": 0.001095}], "S1-2026": [{"label": "Programada", "I": 0.0, "P": 0.89219, "total": 0.89219}, {"label": "No determinado", "I": 0.332935, "P": 0.0, "total": 0.332935}, {"label": "Envejecimiento", "I": 0.289667, "P": 0.0, "total": 0.289667}, {"label": "Causado por Terceros", "I": 0.25634702504503803, "P": 0.0, "total": 0.25634702504503803}, {"label": "Defecto Cliente Particular", "I": 0.09188297187313844, "P": 0.0, "total": 0.09188297187313844}, {"label": "Trabajo de Urgencia", "I": 0.082243, "P": 0.0, "total": 0.082243}, {"label": "Falta de Mantenimiento", "I": 0.077751, "P": 0.0, "total": 0.077751}, {"label": "Causado por Animales", "I": 0.05921036257621708, "P": 0.0, "total": 0.05921036257621708}, {"label": "Red subterránea MT con defecto", "I": 0.040451, "P": 0.0, "total": 0.040451}, {"label": "Causado por Árbol / Poda", "I": 0.028445617385056392, "P": 0.0, "total": 0.028445617385056392}, {"label": "Varios", "I": 0.026015, "P": 0.0, "total": 0.026015}, {"label": "Sistema de Protección", "I": 0.021695, "P": 0.0, "total": 0.021695}, {"label": "Montaje Deficiente", "I": 0.012865, "P": 0.0, "total": 0.012865}, {"label": "Transformador MTBT con defecto", "I": 0.012764000000000001, "P": 0.0, "total": 0.012764000000000001}, {"label": "Maniobras sin tensión", "I": 0.010920000000000001, "P": 0.0, "total": 0.010920000000000001}, {"label": "Sobrecarga", "I": 0.008518, "P": 0.0, "total": 0.008518}, {"label": "Montaje deficiente", "I": 0.005305000000000001, "P": 0.0, "total": 0.005305000000000001}]}}};
+    const stack = [{ key: "root", level: 0, label: "Inicio" }];
+    const colors = { I: "#2563eb", P: "#e11d48" };
+
+    function current() {
+      return stack[stack.length - 1];
+    }
+
+    function nextKey(pointLabel) {
+      const labels = stack.slice(1).map(item => item.label).concat([pointLabel]);
+      return labels.join("||");
+    }
+
+    function chartTitle() {
+      const node = current();
+      const levelName = payload.levelNames[node.level] || "";
+      return `${payload.title} - ${levelName}`;
+    }
+
+    function updateChrome() {
+      document.getElementById("title").textContent = chartTitle();
+      document.getElementById("breadcrumb").textContent = stack.map(item => item.label).join(" > ");
+      document.getElementById("backButton").disabled = stack.length === 1;
+    }
+
+    function render() {
+      const node = current();
+      const rows = payload.data.children[node.key] || payload.data[node.key] || [];
+      const labels = rows.map(row => row.label);
+      const chartTotal = rows.reduce((total, row) => total + Number(row.total || 0), 0);
+      const barPercent = (row, tipo) => {
+        const value = Number(row[tipo] || 0);
+        const total = Number(row.total || 0);
+        return total > 0 ? (value / total) * 100 : 0;
+      };
+      const hierarchyPercent = row => {
+        const total = Number(row.total || 0);
+        return chartTotal > 0 ? (total / chartTotal) * 100 : 0;
+      };
+      const percentText = (row, tipo) => {
+        const percent = barPercent(row, tipo);
+        const displayPercent = percent >= 99.999 ? hierarchyPercent(row) : percent;
+        return `${displayPercent.toFixed(1)}%`;
+      };
+      const percentDescription = (row, tipo) =>
+        barPercent(row, tipo) >= 99.999 ? "Porcentaje de la jerarquia: " : "Porcentaje de la barra: ";
+
+      const traces = ["I", "P"].map(tipo => ({
+        type: "funnel",
+        name: tipo,
+        y: labels,
+        x: rows.map(row => row[tipo] || 0),
+        customdata: rows.map(row => {
+          const percentLabel = percentText(row, tipo);
+          const hoverPercent = percentDescription(row, tipo) + percentLabel + "<br>";
+          return [row.label, percentLabel, row.total || 0, hoverPercent];
+        }),
+        text: rows.map(row => {
+          const value = Number(row[tipo] || 0);
+          const label = percentText(row, tipo);
+          return `${value.toFixed(6)}<br>${label}`;
+        }),
+        textinfo: "text",
+        hovertemplate:
+          "<b>%{customdata[0]}</b><br>" +
+          "Tipo: " + tipo + "<br>" +
+          payload.valueName + ": %{x:.6f}<br>" +
+          "%{customdata[3]}" +
+          "Total barra: %{customdata[2]:.6f}<extra></extra>",
+        marker: { color: colors[tipo] },
+        connector: { line: { color: "#cbd5e1", width: 1 } }
+      }));
+
+      const layout = {
+        title: { text: chartTitle(), x: 0.02, xanchor: "left" },
+        funnelmode: "stack",
+        margin: { l: 170, r: 40, t: 58, b: 40 },
+        paper_bgcolor: "#ffffff",
+        plot_bgcolor: "#ffffff",
+        legend: { orientation: "h", y: 1.06, x: 1, xanchor: "right" },
+        font: { family: "Arial, Helvetica, sans-serif", size: 13, color: "#1f2937" }
+      };
+
+      Plotly.react("chart", traces, layout, { responsive: true, displaylogo: false });
+      updateChrome();
+
+      const chart = document.getElementById("chart");
+      chart.removeAllListeners && chart.removeAllListeners("plotly_click");
+      chart.on("plotly_click", event => {
+        const point = event.points && event.points[0];
+        if (!point) return;
+        if (node.level >= payload.levelNames.length - 1) return;
+        const label = Array.isArray(point.customdata) ? point.customdata[0] : point.y;
+        const key = nextKey(label);
+        if (!payload.data.children[key]) return;
+        stack.push({ key, level: node.level + 1, label });
+        render();
+      });
+    }
+
+    document.getElementById("backButton").addEventListener("click", () => {
+      if (stack.length > 1) {
+        stack.pop();
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

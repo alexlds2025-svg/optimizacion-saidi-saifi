@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAIFI - Periodo > Localizacion</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --ink: #1f2937;
+      --muted: #5d6678;
+      --line: #d9dee8;
+      --i: #2563eb;
+      --p: #e11d48;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    header {
+      padding: 18px 24px 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    #breadcrumb {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:disabled {
+      color: #a4acbb;
+      cursor: default;
+      background: #f4f6fa;
+    }
+    main {
+      min-height: calc(100vh - 91px);
+      padding: 12px;
+    }
+    #chart {
+      width: 100%;
+      height: calc(100vh - 120px);
+      min-height: 620px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="title"></h1>
+    <div class="bar">
+      <div id="breadcrumb"></div>
+      <button id="backButton" type="button" disabled>Volver</button>
+    </div>
+  </header>
+  <main>
+    <div id="chart"></div>
+  </main>
+
+  <script>
+    const payload = {"title": "SAIFI - Periodo > Localizacion", "valueName": "SAIFI", "levelNames": ["Periodo", "Localizacion"], "data": {"root": [{"label": "S1-2024", "I": 0.5060565073553785, "P": 0.26781135379099413, "total": 0.7738678611463727}, {"label": "S1-2025", "I": 0.6570980891585257, "P": 0.334771, "total": 0.9918690891585258}, {"label": "S1-2026", "I": 0.7209500430047654, "P": 0.204203, "total": 0.9251530430047654}], "children": {"S1-2024": [{"label": "Programada", "I": 0.0, "P": 0.26781135379099413, "total": 0.26781135379099413}, {"label": "No determinado", "I": 0.1528083587433717, "P": 0.0, "total": 0.1528083587433717}, {"label": "Red Subterránea MT", "I": 0.09225298461824588, "P": 0.0, "total": 0.09225298461824588}, {"label": "Red Aérea MT", "I": 0.08102019344898809, "P": 0.0, "total": 0.08102019344898809}, {"label": "Maniobras sin tensión", "I": 0.0638969904478938, "P": 0.0, "total": 0.0638969904478938}, {"label": "Varios", "I": 0.03123224899076445, "P": 0.0, "total": 0.03123224899076445}, {"label": "Subestación Convencional MTBT", "I": 0.0187484550294406, "P": 0.0, "total": 0.0187484550294406}, {"label": "Subestación Compacta MTBT", "I": 0.018338481107685642, "P": 0.0, "total": 0.018338481107685642}, {"label": "Instalaciones Particulares MT", "I": 0.017726003859996023, "P": 0.0, "total": 0.017726003859996023}, {"label": "Subestación Aérea MTBT", "I": 0.017257523214996382, "P": 0.0, "total": 0.017257523214996382}, {"label": "PDS/PDF", "I": 0.008601646649029373, "P": 0.0, "total": 0.008601646649029373}, {"label": "Transformador MTBT", "I": 0.004173621244966604, "P": 0.0, "total": 0.004173621244966604}], "S1-2025": [{"label": "Programada", "I": 0.0, "P": 0.334771, "total": 0.334771}, {"label": "No determinado", "I": 0.167637, "P": 0.0, "total": 0.167637}, {"label": "Red Aérea MT", "I": 0.16572146320838116, "P": 0.0, "total": 0.16572146320838116}, {"label": "Maniobras sin tensión", "I": 0.09319, "P": 0.0, "total": 0.09319}, {"label": "Red Subterránea MT", "I": 0.08781039742052071, "P": 0.0, "total": 0.08781039742052071}, {"label": "Varios", "I": 0.04677276548822348, "P": 0.0, "total": 0.04677276548822348}, {"label": "Subestación Compacta MTBT", "I": 0.023358999999999998, "P": 0.0, "total": 0.023358999999999998}, {"label": "Subestación Aérea MTBT", "I": 0.018475444478302506, "P": 0.0, "total": 0.018475444478302506}, {"label": "Subestación Convencional MTBT", "I": 0.017899560322712133, "P": 0.0, "total": 0.017899560322712133}, {"label": "PDS/PDF", "I": 0.015482915458523148, "P": 0.0, "total": 0.015482915458523148}, {"label": "Instalaciones Particulares MT", "I": 0.012118542781862654, "P": 0.0, "total": 0.012118542781862654}, {"label": "Red Aérea AT", "I": 0.002221, "P": 0.0, "total": 0.002221}, {"label": "Transformador MTBT", "I": 0.002118, "P": 0.0, "total": 0.002118}, {"label": "Interruptor Potencia Aéreo MT", "I": 0.00195, "P": 0.0, "total": 0.00195}, {"label": "Recloser", "I": 0.001558, "P": 0.0, "total": 0.001558}, {"label": "Seccionador de Potencia MT", "I": 0.0007819999999999999, "P": 0.0, "total": 0.0007819999999999999}, {"label": "PMS", "I": 2e-06, "P": 0.0, "total": 2e-06}], "S1-2026": [{"label": "Programada", "I": 0.0, "P": 0.204203, "total": 0.204203}, {"label": "No determinado", "I": 0.180085, "P": 0.0, "total": 0.180085}, {"label": "Red Subterránea MT", "I": 0.15903082999887935, "P": 0.0, "total": 0.15903082999887935}, {"label": "Red Aérea MT", "I": 0.11452944855439837, "P": 0.0, "total": 0.11452944855439837}, {"label": "Maniobras sin tensión", "I": 0.079604, "P": 0.0, "total": 0.079604}, {"label": "Subestación Convencional MTBT", "I": 0.041784, "P": 0.0, "total": 0.041784}, {"label": "Instalaciones Particulares MT", "I": 0.04122586450197395, "P": 0.0, "total": 0.04122586450197395}, {"label": "Subestación Compacta MTBT", "I": 0.026642, "P": 0.0, "total": 0.026642}, {"label": "Varios", "I": 0.020948, "P": 0.0, "total": 0.020948}, {"label": "Subestación Aérea MTBT", "I": 0.01744, "P": 0.0, "total": 0.01744}, {"label": "PDS/PDF", "I": 0.01336032605536131, "P": 0.0, "total": 0.01336032605536131}, {"label": "Recloser", "I": 0.011691573894152436, "P": 0.0, "total": 0.011691573894152436}, {"label": "Transformador MTBT", "I": 0.005566, "P": 0.0, "total": 0.005566}, {"label": "Interruptor Potencia Aéreo MT", "I": 0.0037949999999999998, "P": 0.0, "total": 0.0037949999999999998}, {"label": "Regulador de Tensión MT", "I": 0.003028, "P": 0.0, "total": 0.003028}, {"label": "Seccionador de Potencia Aéreo MT", "I": 0.001649, "P": 0.0, "total": 0.001649}, {"label": "Subestación compacta MTBT", "I": 0.000429, "P": 0.0, "total": 0.000429}, {"label": "Seccionador de Potencia MT", "I": 0.00014199999999999998, "P": 0.0, "total": 0.00014199999999999998}]}}};
+    const stack = [{ key: "root", level: 0, label: "Inicio" }];
+    const colors = { I: "#2563eb", P: "#e11d48" };
+
+    function current() {
+      return stack[stack.length - 1];
+    }
+
+    function nextKey(pointLabel) {
+      const labels = stack.slice(1).map(item => item.label).concat([pointLabel]);
+      return labels.join("||");
+    }
+
+    function chartTitle() {
+      const node = current();
+      const levelName = payload.levelNames[node.level] || "";
+      return `${payload.title} - ${levelName}`;
+    }
+
+    function updateChrome() {
+      document.getElementById("title").textContent = chartTitle();
+      document.getElementById("breadcrumb").textContent = stack.map(item => item.label).join(" > ");
+      document.getElementById("backButton").disabled = stack.length === 1;
+    }
+
+    function render() {
+      const node = current();
+      const rows = payload.data.children[node.key] || payload.data[node.key] || [];
+      const labels = rows.map(row => row.label);
+      const chartTotal = rows.reduce((total, row) => total + Number(row.total || 0), 0);
+      const barPercent = (row, tipo) => {
+        const value = Number(row[tipo] || 0);
+        const total = Number(row.total || 0);
+        return total > 0 ? (value / total) * 100 : 0;
+      };
+      const hierarchyPercent = row => {
+        const total = Number(row.total || 0);
+        return chartTotal > 0 ? (total / chartTotal) * 100 : 0;
+      };
+      const percentText = (row, tipo) => {
+        const percent = barPercent(row, tipo);
+        const displayPercent = percent >= 99.999 ? hierarchyPercent(row) : percent;
+        return `${displayPercent.toFixed(1)}%`;
+      };
+      const percentDescription = (row, tipo) =>
+        barPercent(row, tipo) >= 99.999 ? "Porcentaje de la jerarquia: " : "Porcentaje de la barra: ";
+
+      const traces = ["I", "P"].map(tipo => ({
+        type: "funnel",
+        name: tipo,
+        y: labels,
+        x: rows.map(row => row[tipo] || 0),
+        customdata: rows.map(row => {
+          const percentLabel = percentText(row, tipo);
+          const hoverPercent = percentDescription(row, tipo) + percentLabel + "<br>";
+          return [row.label, percentLabel, row.total || 0, hoverPercent];
+        }),
+        text: rows.map(row => {
+          const value = Number(row[tipo] || 0);
+          const label = percentText(row, tipo);
+          return `${value.toFixed(6)}<br>${label}`;
+        }),
+        textinfo: "text",
+        hovertemplate:
+          "<b>%{customdata[0]}</b><br>" +
+          "Tipo: " + tipo + "<br>" +
+          payload.valueName + ": %{x:.6f}<br>" +
+          "%{customdata[3]}" +
+          "Total barra: %{customdata[2]:.6f}<extra></extra>",
+        marker: { color: colors[tipo] },
+        connector: { line: { color: "#cbd5e1", width: 1 } }
+      }));
+
+      const layout = {
+        title: { text: chartTitle(), x: 0.02, xanchor: "left" },
+        funnelmode: "stack",
+        margin: { l: 170, r: 40, t: 58, b: 40 },
+        paper_bgcolor: "#ffffff",
+        plot_bgcolor: "#ffffff",
+        legend: { orientation: "h", y: 1.06, x: 1, xanchor: "right" },
+        font: { family: "Arial, Helvetica, sans-serif", size: 13, color: "#1f2937" }
+      };
+
+      Plotly.react("chart", traces, layout, { responsive: true, displaylogo: false });
+      updateChrome();
+
+      const chart = document.getElementById("chart");
+      chart.removeAllListeners && chart.removeAllListeners("plotly_click");
+      chart.on("plotly_click", event => {
+        const point = event.points && event.points[0];
+        if (!point) return;
+        if (node.level >= payload.levelNames.length - 1) return;
+        const label = Array.isArray(point.customdata) ? point.customdata[0] : point.y;
+        const key = nextKey(label);
+        if (!payload.data.children[key]) return;
+        stack.push({ key, level: node.level + 1, label });
+        render();
+      });
+    }
+
+    document.getElementById("backButton").addEventListener("click", () => {
+      if (stack.length > 1) {
+        stack.pop();
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
